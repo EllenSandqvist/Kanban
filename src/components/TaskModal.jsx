@@ -25,7 +25,7 @@ const TaskModal = ({
   };
 
   return (
-    <div className="modal modal-hidden">
+    <div className="modal">
       <form className="modal-content" onSubmit={handleSubmit}>
         <button
           type="button"

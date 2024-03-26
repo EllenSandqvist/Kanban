@@ -10,7 +10,7 @@ const AddTaskForm = ({ onClose, newTask, setNewTask, handleAddTask }) => {
   };
 
   return (
-    <div className="modal modal-hidden">
+    <div className="modal modal-bg-new-task">
       <form className="form-add-task modal-content" onSubmit={handleAddTask}>
         <button type="button" className="button-close" onClick={onClose}>
           <IoClose />
