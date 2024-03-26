@@ -3,8 +3,9 @@ import ColumnHeading from "./ColumnHeading";
 import Card from "./Card";
 import AddTaskForm from "./AddTaskForm";
 
-const TodoColumn = ({
-  todoTasks,
+const Column = ({
+  columnName,
+  tasks,
   newTask,
   setNewTask,
   handleAddTask,
@@ -13,41 +14,46 @@ const TodoColumn = ({
   handleDelete,
   submitEditedTask,
   modalShown,
+  // setModalShown,
   toggleModal,
   selectedTask,
 }) => {
   return (
     <div className="column">
-      <ColumnHeading columnName={"Todo"} />
-      {todoTasks.map((todoTask) => {
+      <ColumnHeading columnName={columnName} />
+      {tasks.map((task) => {
         return (
           <Card
-            key={todoTask.id}
-            columnName={"Todo"}
-            task={todoTask}
+            key={task.id}
+            columnName={columnName}
+            task={task}
             handleDelete={handleDelete}
             submitEditedTask={submitEditedTask}
             modalShown={modalShown}
+            // setModalShown={setModalShown}
             toggleModal={toggleModal}
             selectedTask={selectedTask}
           />
         );
       })}
 
-      {!inputIsShown ? (
+      {columnName === "Todo" && !inputIsShown ? (
         <button className="add-button" onClick={handleShowInput}>
           + New task
         </button>
       ) : (
-        <AddTaskForm
-          onClose={handleShowInput}
-          newTask={newTask}
-          setNewTask={setNewTask}
-          handleAddTask={handleAddTask}
-        />
+        columnName === "Todo" &&
+        inputIsShown && (
+          <AddTaskForm
+            onClose={handleShowInput}
+            newTask={newTask}
+            setNewTask={setNewTask}
+            handleAddTask={handleAddTask}
+          />
+        )
       )}
     </div>
   );
 };
 
-export default TodoColumn;
+export default Column;

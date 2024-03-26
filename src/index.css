@@ -90,12 +90,17 @@ footer {
   font-size: 1.2rem;
 }
 
+.modal-task-info {
+  border: 1px solid rgb(231, 207, 215);
+  background-color: lavenderblush;
+}
+
 .label-hidden {
   display: none;
 }
 
 .new-task-details {
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.5;
   width: 95%;
 }

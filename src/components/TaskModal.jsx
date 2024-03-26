@@ -4,7 +4,6 @@ import ColumnHeading from "./ColumnHeading";
 import DeleteButton from "./DeleteButton";
 
 const TaskModal = ({
-  columnName,
   toggleModal,
   selectedTask,
   handleDelete,
@@ -12,10 +11,7 @@ const TaskModal = ({
   submitEditedTask,
 }) => {
   const [editedTask, setEditedTask] = useState({
-    id: selectedTask.id,
-    date: selectedTask.date,
-    task: selectedTask.task,
-    info: selectedTask.info,
+    ...selectedTask,
   });
 
   const handleEdit = (e) => {
@@ -34,11 +30,11 @@ const TaskModal = ({
         <button
           type="button"
           className="button-close"
-          onClick={() => toggleModal(selectedTask)}
+          onClick={() => toggleModal(null)}
         >
           <IoClose />
         </button>
-        <ColumnHeading columnName={columnName} />
+        <ColumnHeading columnName={selectedTask.columnName} />
         <input
           type="text"
           className="modal-task-heading editable"
@@ -50,10 +46,12 @@ const TaskModal = ({
         <textarea
           className="modal-task-info editable"
           name="info"
-          defaultValue={selectedTask.info}
+          rows={8}
+          value={editedTask.info}
           onChange={handleEdit}
         />
         <DeleteButton
+          columnName={selectedTask.columnName}
           handleDelete={handleDelete}
           task={selectedTask}
           modalShown={modalShown}

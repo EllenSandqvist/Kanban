@@ -8,6 +8,7 @@ const Card = ({
   handleDelete,
   submitEditedTask,
   modalShown,
+  // setModalShown,
   toggleModal,
   selectedTask,
 }) => {
@@ -16,7 +17,7 @@ const Card = ({
       <div className="task-card">
         <div
           className="task-card-info"
-          onClick={!modalShown ? () => toggleModal(task) : null}
+          onClick={!modalShown ? () => toggleModal(task, columnName) : null}
         >
           <CardContent task={task} />
         </div>
@@ -30,7 +31,6 @@ const Card = ({
       </div>
       {modalShown && (
         <TaskModal
-          columnName={columnName}
           toggleModal={toggleModal}
           selectedTask={selectedTask}
           handleDelete={handleDelete}

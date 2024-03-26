@@ -1,17 +1,47 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import TodoColumn from "./components/TodoColumn";
-import DoingColumn from "./components/DoingColumn";
-import DoneColumn from "./components/DoneColumn";
+import Column from "./components/Column";
 
 function App() {
   // states;
   const [todoTasks, setTodoTasks] = useState(
     JSON.parse(localStorage.getItem("todoTasklist")) || []
   );
-  const [doingTasks, setDoingTasks] = useState([]);
-  const [doneTasks, setDoneTasks] = useState([]);
+
+  //* Todo: Hårdkodat, ska tömmas sedan!
+  const [doingTasks, setDoingTasks] = useState(
+    JSON.parse(localStorage.getItem("doingTasklist")) || [
+      {
+        id: "10",
+        date: new Date().toLocaleDateString(),
+        task: "First Doing",
+        info: "Testar hårdkodad Doing",
+      },
+      {
+        id: "11",
+        date: new Date().toLocaleDateString(),
+        task: "Second Doing",
+        info: "Testar hårdkod nr 2",
+      },
+    ]
+  );
+  const [doneTasks, setDoneTasks] = useState(
+    JSON.parse(localStorage.getItem("doneTasklist")) || [
+      {
+        id: "15",
+        date: new Date().toLocaleDateString(),
+        task: "First Done",
+        info: "Testar hårdkodad Done",
+      },
+      {
+        id: "16",
+        date: new Date().toLocaleDateString(),
+        task: "Second Done",
+        info: "Testar hårdkod nr 3",
+      },
+    ]
+  );
 
   const [newTask, setNewTask] = useState({
     id: "null",
@@ -19,15 +49,33 @@ function App() {
     task: "",
     info: "",
   });
-  const [selectedTask, setSelectedTask] = useState(null);
+
+  const [selectedTask, setSelectedTask] = useState({
+    id: null,
+    date: "",
+    task: "",
+    info: "",
+    columnName: "",
+  });
 
   //states for modals
   const [inputIsShown, setInputIsShown] = useState(false);
   const [modalShown, setModalShown] = useState(false);
 
+  //Save todoTasks to localStorage
   useEffect(() => {
     localStorage.setItem("todoTasklist", JSON.stringify(todoTasks));
   }, [todoTasks]);
+
+  //Save doingTasks to localStorage
+  useEffect(() => {
+    localStorage.setItem("doingTasklist", JSON.stringify(doingTasks));
+  }, [doingTasks]);
+
+  //Save doneTasks to localStorage
+  useEffect(() => {
+    localStorage.setItem("doneTasklist", JSON.stringify(doneTasks));
+  }, [doneTasks]);
 
   //function to toggle add-task input
   function handleShowInput() {
@@ -35,9 +83,10 @@ function App() {
   }
 
   //function to toggle task modal
-  function toggleModal(task) {
+  function toggleModal(task, columnName) {
+    console.log("columnName in toggleModal:", columnName);
     setModalShown(!modalShown);
-    setSelectedTask(task);
+    setSelectedTask({ ...task, columnName: columnName });
   }
 
   //handle add new task, clear input and hide input field
@@ -60,17 +109,32 @@ function App() {
     setTodoTasks(newTaskList);
   };
 
-  //handle edited task
   const submitEditedTask = (editedTask) => {
-    updateTask(editedTask);
     setModalShown(false);
-  };
-
-  const updateTask = (editedTask) => {
-    const updatedTodoTasks = todoTasks.map((todoTask) => {
-      return todoTask.id === editedTask.id ? editedTask : todoTask;
-    });
-    setTodoTasks(updatedTodoTasks);
+    switch (editedTask.columnName) {
+      case "Todo":
+        const updatedTodoTasks = todoTasks.map((todoTask) => {
+          return todoTask.id === editedTask.id ? editedTask : todoTask;
+        });
+        setTodoTasks(updatedTodoTasks);
+        break;
+      case "Doing":
+        const updatedDoingTasks = doingTasks.map((doingTask) => {
+          return doingTask.id === editedTask.id ? editedTask : doingTask;
+        });
+        setDoingTasks(updatedDoingTasks);
+        break;
+      case "Done":
+        const updatedDoneTasks = doneTasks.map((doneTask) => {
+          return doneTask.id === editedTask.id ? editedTask : doneTask;
+        });
+        setDoneTasks(updatedDoneTasks);
+        break;
+      default:
+        console.log("vet inte vad som ska uppdateras");
+        break;
+    }
+    setSelectedTask(null);
   };
 
   //* todo - make function work for all types of tasks...
@@ -80,10 +144,10 @@ function App() {
         setTodoTasks(todoTasks.filter((todoTask) => todoTask.id !== id));
         break;
       case "Doing":
-        console.log("doing task ska deletas");
+        setDoingTasks(doingTasks.filter((doingTask) => doingTask.id !== id));
         break;
       case "Done":
-        console.log("done task ska deletas");
+        setDoneTasks(doneTasks.filter((doneTask) => doneTask.id !== id));
         break;
       default:
         console.log("vet inte vad som ska deletas");
@@ -97,8 +161,9 @@ function App() {
       <Header />
       <main>
         <section className="kanban-section">
-          <TodoColumn
-            todoTasks={todoTasks}
+          <Column
+            columnName="Todo"
+            tasks={todoTasks}
             newTask={newTask}
             setNewTask={setNewTask}
             handleAddTask={handleAddTask}
@@ -110,23 +175,23 @@ function App() {
             toggleModal={toggleModal}
             selectedTask={selectedTask}
           />
-          <DoingColumn
-            todoTasks={todoTasks}
-            doingTasks={doingTasks}
-            setDoingTasks={setDoingTasks}
+          <Column
+            columnName="Doing"
+            tasks={doingTasks}
             handleDelete={handleDelete}
             submitEditedTask={submitEditedTask}
             modalShown={modalShown}
             toggleModal={toggleModal}
+            selectedTask={selectedTask}
           />
-          <DoneColumn
-            todoTasks={todoTasks}
-            doneTasks={doneTasks}
-            setDoneTasks={setDoneTasks}
+          <Column
+            columnName="Done"
+            tasks={doneTasks}
             handleDelete={handleDelete}
             submitEditedTask={submitEditedTask}
             modalShown={modalShown}
             toggleModal={toggleModal}
+            selectedTask={selectedTask}
           />
         </section>
       </main>
