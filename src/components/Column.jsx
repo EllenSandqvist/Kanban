@@ -6,15 +6,16 @@ import AddTaskForm from "./AddTaskForm";
 const Column = ({
   columnName,
   tasks,
-  newTask,
-  setNewTask,
+  newTaskInfo,
+  setNewTaskInfo,
+  newTaskTitle,
+  setNewTaskTitle,
   handleAddTask,
   handleShowInput,
   inputIsShown,
   handleDelete,
   submitEditedTask,
   modalShown,
-  // setModalShown,
   toggleModal,
   selectedTask,
 }) => {
@@ -30,7 +31,6 @@ const Column = ({
             handleDelete={handleDelete}
             submitEditedTask={submitEditedTask}
             modalShown={modalShown}
-            // setModalShown={setModalShown}
             toggleModal={toggleModal}
             selectedTask={selectedTask}
           />
@@ -46,8 +46,10 @@ const Column = ({
         inputIsShown && (
           <AddTaskForm
             onClose={handleShowInput}
-            newTask={newTask}
-            setNewTask={setNewTask}
+            newTaskInfo={newTaskInfo}
+            setNewTaskInfo={setNewTaskInfo}
+            newTaskTitle={newTaskTitle}
+            setNewTaskTitle={setNewTaskTitle}
             handleAddTask={handleAddTask}
           />
         )

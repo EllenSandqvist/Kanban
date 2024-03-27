@@ -43,12 +43,8 @@ function App() {
     ]
   );
 
-  const [newTask, setNewTask] = useState({
-    id: "null",
-    date: "",
-    task: "",
-    info: "",
-  });
+  const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [newTaskInfo, setNewTaskInfo] = useState("");
 
   const [selectedTask, setSelectedTask] = useState({
     id: null,
@@ -92,21 +88,18 @@ function App() {
   //handle add new task, clear input and hide input field
   const handleAddTask = (e) => {
     e.preventDefault();
-    addTask(newTask);
-    setNewTask("");
-    setInputIsShown(false);
-  };
-
-  const addTask = (task) => {
     const id = todoTasks.length ? todoTasks[todoTasks.length - 1].id + 1 : 1;
     const myNewTask = {
       id,
       date: new Date().toLocaleDateString(),
-      task: task.task,
-      info: task.info,
+      task: newTaskTitle,
+      info: newTaskInfo,
     };
     const newTaskList = [...todoTasks, myNewTask];
     setTodoTasks(newTaskList);
+    setNewTaskTitle("");
+    setNewTaskInfo("");
+    setInputIsShown(false);
   };
 
   const submitEditedTask = (editedTask) => {
@@ -164,8 +157,10 @@ function App() {
           <Column
             columnName="Todo"
             tasks={todoTasks}
-            newTask={newTask}
-            setNewTask={setNewTask}
+            newTaskInfo={newTaskInfo}
+            setNewTaskInfo={setNewTaskInfo}
+            newTaskTitle={newTaskTitle}
+            setNewTaskTitle={setNewTaskTitle}
             handleAddTask={handleAddTask}
             handleShowInput={handleShowInput}
             inputIsShown={inputIsShown}

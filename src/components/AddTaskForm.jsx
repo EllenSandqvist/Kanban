@@ -1,14 +1,13 @@
 import { IoClose } from "react-icons/io5";
 
-const AddTaskForm = ({ onClose, newTask, setNewTask, handleAddTask }) => {
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewTask((prevTask) => ({
-      ...prevTask,
-      [name]: value,
-    }));
-  };
-
+const AddTaskForm = ({
+  onClose,
+  newTaskInfo,
+  setNewTaskInfo,
+  newTaskTitle,
+  setNewTaskTitle,
+  handleAddTask,
+}) => {
   return (
     <div className="modal modal-bg-new-task">
       <form className="form-add-task modal-content" onSubmit={handleAddTask}>
@@ -29,8 +28,8 @@ const AddTaskForm = ({ onClose, newTask, setNewTask, handleAddTask }) => {
           id="new-task"
           placeholder="New task..."
           required
-          value={newTask.task}
-          onChange={handleChange}
+          value={newTaskTitle}
+          onChange={(e) => setNewTaskTitle(e.target.value)}
         />
         <label
           htmlFor="task-info"
@@ -44,8 +43,8 @@ const AddTaskForm = ({ onClose, newTask, setNewTask, handleAddTask }) => {
           placeholder="Additional task info..."
           cols="50"
           rows="5"
-          value={newTask.info}
-          onChange={handleChange}
+          value={newTaskInfo}
+          onChange={(e) => setNewTaskInfo(e.target.value)}
         ></textarea>
         <button type="submit" className="add-button">
           Add
