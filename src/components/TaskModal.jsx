@@ -1,22 +1,24 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { IoClose } from "react-icons/io5";
+import TaskContext from "../context/TaskContext";
 import ColumnHeading from "./ColumnHeading";
 import DeleteButton from "./DeleteButton";
 
-const TaskModal = ({
-  toggleModal,
-  selectedTask,
-  handleDelete,
-  modalShown,
-  submitEditedTask,
-}) => {
+const TaskModal = () => {
+  const { selectedTask, submitEditedTask, toggleModal } =
+    useContext(TaskContext);
+
   const [editedTask, setEditedTask] = useState({
     ...selectedTask,
   });
 
   const handleEdit = (e) => {
     const { name, value } = e.target;
-    setEditedTask((prevTask) => ({ ...prevTask, [name]: value }));
+    setEditedTask((prevTask) => ({
+      ...prevTask,
+      [name]: value,
+      date: new Date().toLocaleDateString(),
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -52,9 +54,7 @@ const TaskModal = ({
         />
         <DeleteButton
           columnName={selectedTask.columnName}
-          handleDelete={handleDelete}
           task={selectedTask}
-          modalShown={modalShown}
           toggleModal={toggleModal}
         />
         <button type="submit" className="add-button">

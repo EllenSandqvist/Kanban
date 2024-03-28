@@ -10,18 +10,56 @@ button {
   cursor: pointer;
 }
 
-header,
+header {
+  width: 100%;
+  background-color: rgba(222, 113, 113, 0.5);
+  height: 7vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 1em;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: black;
+}
+
+.Nav ul {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  margin-right: 2em;
+}
+
+.Nav li {
+  list-style: none;
+  font-size: 1.3rem;
+}
+
+.active {
+  text-decoration: none;
+  background-color: black;
+  color: white;
+  padding: 0.25em 0.5em;
+  border-radius: 10px;
+}
+
+:not(.active) {
+  color: black;
+  text-decoration: none;
+}
+
 footer {
   width: 100%;
   background-color: rgba(222, 113, 113, 0.5);
   height: 7vh;
   display: flex;
   align-items: center;
-  padding-left: 1em;
 }
 
 main {
-  height: 93vh;
+  height: 86vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,7 +83,7 @@ footer {
 /******** MODALS **********/
 .modal-content {
   background-color: white;
-  margin: 30vh auto;
+  margin: 15vh auto;
   padding: 1.7em;
   max-width: 600px;
   width: 60%;

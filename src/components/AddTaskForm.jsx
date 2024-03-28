@@ -1,13 +1,15 @@
+import { useContext } from "react";
+import TaskContext from "../context/TaskContext";
 import { IoClose } from "react-icons/io5";
 
-const AddTaskForm = ({
-  onClose,
-  newTaskInfo,
-  setNewTaskInfo,
-  newTaskTitle,
-  setNewTaskTitle,
-  handleAddTask,
-}) => {
+const AddTaskForm = ({ onClose }) => {
+  const {
+    handleAddTask,
+    newTaskInfo,
+    newTaskTitle,
+    setNewTaskInfo,
+    setNewTaskTitle,
+  } = useContext(TaskContext);
   return (
     <div className="modal modal-bg-new-task">
       <form className="form-add-task modal-content" onSubmit={handleAddTask}>

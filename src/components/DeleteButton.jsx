@@ -1,12 +1,9 @@
+import { useContext } from "react";
+import TaskContext from "../context/TaskContext";
 import { IoTrash } from "react-icons/io5";
 
-const DeleteButton = ({
-  handleDelete,
-  task,
-  columnName,
-  modalShown,
-  toggleModal,
-}) => {
+const DeleteButton = ({ task, columnName, toggleModal }) => {
+  const { handleDelete, modalShown } = useContext(TaskContext);
   return (
     <button className="trash" type="button">
       <IoTrash

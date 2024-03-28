@@ -1,17 +1,11 @@
+import { useContext } from "react";
+import TaskContext from "../context/TaskContext";
 import CardContent from "./CardContent";
 import TaskModal from "./TaskModal";
 import DeleteButton from "./DeleteButton";
 
-const Card = ({
-  columnName,
-  task,
-  handleDelete,
-  submitEditedTask,
-  modalShown,
-  // setModalShown,
-  toggleModal,
-  selectedTask,
-}) => {
+const Card = ({ columnName, task }) => {
+  const { modalShown, toggleModal } = useContext(TaskContext);
   return (
     <>
       <div className="task-card">
@@ -22,22 +16,12 @@ const Card = ({
           <CardContent task={task} />
         </div>
         <DeleteButton
-          handleDelete={handleDelete}
           task={task}
           columnName={columnName}
-          modalShown={modalShown}
           toggleModal={toggleModal}
         />
       </div>
-      {modalShown && (
-        <TaskModal
-          toggleModal={toggleModal}
-          selectedTask={selectedTask}
-          handleDelete={handleDelete}
-          modalShown={modalShown}
-          submitEditedTask={submitEditedTask}
-        />
-      )}
+      {modalShown && <TaskModal />}
     </>
   );
 };
