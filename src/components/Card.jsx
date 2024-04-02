@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CardContent from "./CardContent";
 import TaskModal from "./TaskModal";
-import DeleteButton from "./DeleteButton";
+import { MdOutlineOpenInFull } from "react-icons/md";
 
 const Card = ({ task }) => {
   const [modalShown, setModalShown] = useState(false);
@@ -15,17 +15,16 @@ const Card = ({ task }) => {
   return (
     <>
       <div className="task-card">
-        <div
-          className="task-card-info"
-          onClick={!modalShown ? () => toggleModal(task) : null}
-        >
+        <div className="task-card-info">
           <CardContent task={task} />
         </div>
-        <DeleteButton
-          task={task}
-          modalShown={modalShown}
-          toggleModal={toggleModal}
-        />
+        <button
+          type="button"
+          className="open-task-btn"
+          onClick={!modalShown ? () => toggleModal(task) : null}
+        >
+          <MdOutlineOpenInFull />
+        </button>
       </div>
       {modalShown && (
         <TaskModal
