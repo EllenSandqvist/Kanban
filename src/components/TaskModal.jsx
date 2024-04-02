@@ -63,6 +63,7 @@ const TaskModal = ({
         break;
     }
     setSelectedTask(null);
+    setEditedTask(null);
     setModalShown(false);
   };
 
@@ -74,32 +75,46 @@ const TaskModal = ({
           className="button-close"
           onClick={() => toggleModal(null)}
         >
-          <IoClose />
+          <IoClose className="IoClose" />
         </button>
         <ColumnHeading columnTitle={selectedTask.columnName} />
+        <label
+          htmlFor="editTaskName"
+          aria-label="Edit task name"
+          className="label-hidden"
+        ></label>
         <input
           type="text"
           className="modal-task-heading editable"
+          id="editTaskName"
           name="task"
           value={editedTask.task}
           onChange={handleEdit}
         />
         <p>{selectedTask.date}</p>
+        <label
+          htmlFor="editTaskInfo"
+          aria-label="Edit task info"
+          className="label-hidden"
+        ></label>
         <textarea
           className="modal-task-info editable"
+          id="editTaskInfo"
           name="info"
           rows={8}
           value={editedTask.info}
           onChange={handleEdit}
         />
-        <DeleteButton
-          task={selectedTask}
-          modalShown={modalShown}
-          toggleModal={toggleModal}
-        />
-        <button type="submit" className="add-button">
-          Save
-        </button>
+        <div className="task-modal-buttons">
+          <button type="submit" className="add-button">
+            Save
+          </button>
+          <DeleteButton
+            task={selectedTask}
+            modalShown={modalShown}
+            toggleModal={toggleModal}
+          />
+        </div>
       </form>
     </div>
   );
