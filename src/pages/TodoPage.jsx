@@ -6,7 +6,7 @@ const TodoPage = () => {
   const { todoTasks } = useContext(TaskContext);
   return (
     <main>
-      <Column columnName="Todo" tasks={todoTasks} />
+      <Column columnTitle="Todo" tasks={todoTasks} />
     </main>
   );
 };

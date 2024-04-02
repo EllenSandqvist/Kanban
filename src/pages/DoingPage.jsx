@@ -6,7 +6,7 @@ const DoningPage = () => {
   const { doingTasks } = useContext(TaskContext);
   return (
     <main>
-      <Column columnName="Doing" tasks={doingTasks} />
+      <Column columnTitle="Doing" tasks={doingTasks} />
     </main>
   );
 };

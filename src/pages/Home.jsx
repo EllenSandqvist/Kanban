@@ -7,9 +7,9 @@ const Home = () => {
   return (
     <main>
       <section className="kanban-section">
-        <Column columnName="Todo" tasks={todoTasks} />
-        <Column columnName="Doing" tasks={doingTasks} />
-        <Column columnName="Done" tasks={doneTasks} />
+        <Column columnTitle="Todo" tasks={todoTasks} />
+        <Column columnTitle="Doing" tasks={doingTasks} />
+        <Column columnTitle="Done" tasks={doneTasks} />
       </section>
     </main>
   );

@@ -3,7 +3,7 @@ import CardContent from "./CardContent";
 import TaskModal from "./TaskModal";
 import DeleteButton from "./DeleteButton";
 
-const Card = ({ columnName, task }) => {
+const Card = ({ task }) => {
   const [modalShown, setModalShown] = useState(false);
   const [selectedTask, setSelectedTask] = useState({});
 
@@ -23,7 +23,6 @@ const Card = ({ columnName, task }) => {
         </div>
         <DeleteButton
           task={task}
-          columnName={columnName}
           modalShown={modalShown}
           toggleModal={toggleModal}
         />

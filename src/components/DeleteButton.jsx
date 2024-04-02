@@ -2,7 +2,7 @@ import { useContext } from "react";
 import TaskContext from "../context/TaskContext";
 import { IoTrash } from "react-icons/io5";
 
-const DeleteButton = ({ task, columnName, modalShown, toggleModal }) => {
+const DeleteButton = ({ task, modalShown, toggleModal }) => {
   const {
     todoTasks,
     setTodoTasks,
@@ -12,16 +12,18 @@ const DeleteButton = ({ task, columnName, modalShown, toggleModal }) => {
     setDoneTasks,
   } = useContext(TaskContext);
 
-  const handleDelete = (columnName, id) => {
-    switch (columnName) {
+  const handleDelete = (task) => {
+    switch (task.columnName) {
       case "Todo":
-        setTodoTasks(todoTasks.filter((todoTask) => todoTask.id !== id));
+        setTodoTasks(todoTasks.filter((todoTask) => todoTask.id !== task.id));
         break;
       case "Doing":
-        setDoingTasks(doingTasks.filter((doingTask) => doingTask.id !== id));
+        setDoingTasks(
+          doingTasks.filter((doingTask) => doingTask.id !== task.id)
+        );
         break;
       case "Done":
-        setDoneTasks(doneTasks.filter((doneTask) => doneTask.id !== id));
+        setDoneTasks(doneTasks.filter((doneTask) => doneTask.id !== task.id));
         break;
       default:
         console.log("vet inte vad som ska deletas");
@@ -33,7 +35,7 @@ const DeleteButton = ({ task, columnName, modalShown, toggleModal }) => {
     <button className="trash" type="button">
       <IoTrash
         onClick={() => {
-          handleDelete(columnName, task.id);
+          handleDelete(task);
           modalShown && toggleModal();
         }}
         tabIndex="0"

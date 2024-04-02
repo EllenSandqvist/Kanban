@@ -76,7 +76,7 @@ const TaskModal = ({
         >
           <IoClose />
         </button>
-        <ColumnHeading columnName={selectedTask.columnName} />
+        <ColumnHeading columnTitle={selectedTask.columnName} />
         <input
           type="text"
           className="modal-task-heading editable"
@@ -93,7 +93,6 @@ const TaskModal = ({
           onChange={handleEdit}
         />
         <DeleteButton
-          columnName={selectedTask.columnName}
           task={selectedTask}
           modalShown={modalShown}
           toggleModal={toggleModal}

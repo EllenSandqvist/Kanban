@@ -3,7 +3,7 @@ import ColumnHeading from "./ColumnHeading";
 import Card from "./Card";
 import AddTaskForm from "./AddTaskForm";
 
-const Column = ({ columnName, tasks }) => {
+const Column = ({ columnTitle, tasks }) => {
   const [inputIsShown, setInputIsShown] = useState(false);
 
   function handleShowInput() {
@@ -12,17 +12,17 @@ const Column = ({ columnName, tasks }) => {
 
   return (
     <div className="column">
-      <ColumnHeading columnName={columnName} />
+      <ColumnHeading columnTitle={columnTitle} />
       {tasks.map((task) => {
-        return <Card key={task.id} columnName={columnName} task={task} />;
+        return <Card key={task.id} task={task} />;
       })}
 
-      {columnName === "Todo" && !inputIsShown ? (
+      {columnTitle === "Todo" && !inputIsShown ? (
         <button className="add-button" onClick={handleShowInput}>
           + New task
         </button>
       ) : (
-        columnName === "Todo" &&
+        columnTitle === "Todo" &&
         inputIsShown && (
           <AddTaskForm
             onClose={handleShowInput}
