@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import TaskContext from "../context/TaskContext";
 import CardContent from "./CardContent";
 import TaskModal from "./TaskModal";
 import DeleteButton from "./DeleteButton";
@@ -11,7 +10,6 @@ const Card = ({ columnName, task }) => {
   //function to toggle task modal
   function toggleModal(task) {
     setModalShown(!modalShown);
-    console.log("columnName i toggleModal: " + task.columnName);
     setSelectedTask({ ...task });
   }
   return (
@@ -26,6 +24,7 @@ const Card = ({ columnName, task }) => {
         <DeleteButton
           task={task}
           columnName={columnName}
+          modalShown={modalShown}
           toggleModal={toggleModal}
         />
       </div>
@@ -33,6 +32,7 @@ const Card = ({ columnName, task }) => {
         <TaskModal
           selectedTask={selectedTask}
           setSelectedTask={setSelectedTask}
+          modalShown={modalShown}
           setModalShown={setModalShown}
           toggleModal={toggleModal}
         />

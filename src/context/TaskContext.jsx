@@ -3,9 +3,6 @@ import { createContext, useEffect, useState } from "react";
 const TaskContext = createContext({});
 
 export const TaskProvider = ({ children }) => {
-  // const [modalShown, setModalShown] = useState(false);
-  // const [selectedTask, setSelectedTask] = useState({});
-
   const [todoTasks, setTodoTasks] = useState(
     JSON.parse(localStorage.getItem("todoTasklist")) || []
   );
@@ -63,74 +60,15 @@ export const TaskProvider = ({ children }) => {
     localStorage.setItem("doneTasklist", JSON.stringify(doneTasks));
   }, [doneTasks]);
 
-  // //function to toggle task modal
-  // function toggleModal(task, columnName) {
-  //   setModalShown(!modalShown);
-  //   setSelectedTask({ ...task, columnName: columnName });
-  // }
-
-  // const submitEditedTask = (editedTask) => {
-  //   setModalShown(false);
-  //   switch (editedTask.columnName) {
-  //     case "Todo":
-  //       const updatedTodoTasks = todoTasks.map((todoTask) => {
-  //         return todoTask.id === editedTask.id ? editedTask : todoTask;
-  //       });
-  //       setTodoTasks(updatedTodoTasks);
-  //       break;
-  //     case "Doing":
-  //       const updatedDoingTasks = doingTasks.map((doingTask) => {
-  //         return doingTask.id === editedTask.id ? editedTask : doingTask;
-  //       });
-  //       setDoingTasks(updatedDoingTasks);
-  //       break;
-  //     case "Done":
-  //       const updatedDoneTasks = doneTasks.map((doneTask) => {
-  //         return doneTask.id === editedTask.id ? editedTask : doneTask;
-  //       });
-  //       setDoneTasks(updatedDoneTasks);
-  //       break;
-  //     default:
-  //       console.log("vet inte vad som ska uppdateras");
-  //       break;
-  //   }
-  //   setSelectedTask(null);
-  // };
-
-  const handleDelete = (columnName, id) => {
-    switch (columnName) {
-      case "Todo":
-        setTodoTasks(todoTasks.filter((todoTask) => todoTask.id !== id));
-        break;
-      case "Doing":
-        setDoingTasks(doingTasks.filter((doingTask) => doingTask.id !== id));
-        break;
-      case "Done":
-        setDoneTasks(doneTasks.filter((doneTask) => doneTask.id !== id));
-        break;
-      default:
-        console.log("vet inte vad som ska deletas");
-        break;
-    }
-    console.log(columnName);
-  };
-
   return (
     <TaskContext.Provider
       value={{
-        // modalShown,
-        // setModalShown,
-        // selectedTask,
-        // setSelectedTask,
-        // toggleModal,
         todoTasks,
         setTodoTasks,
         doingTasks,
         setDoingTasks,
         doneTasks,
         setDoneTasks,
-        // submitEditedTask,
-        handleDelete,
       }}
     >
       {children}

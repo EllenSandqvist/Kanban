@@ -7,6 +7,7 @@ import DeleteButton from "./DeleteButton";
 const TaskModal = ({
   selectedTask,
   setSelectedTask,
+  modalShown,
   setModalShown,
   toggleModal,
 }) => {
@@ -58,7 +59,7 @@ const TaskModal = ({
         setDoneTasks(updatedDoneTasks);
         break;
       default:
-        console.log("vet inte vad som ska uppdateras");
+        console.log("Can't find the right task to update");
         break;
     }
     setSelectedTask(null);
@@ -94,6 +95,7 @@ const TaskModal = ({
         <DeleteButton
           columnName={selectedTask.columnName}
           task={selectedTask}
+          modalShown={modalShown}
           toggleModal={toggleModal}
         />
         <button type="submit" className="add-button">

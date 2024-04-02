@@ -1,5 +1,3 @@
-// import { useContext } from "react";
-// import TaskContext from "../context/TaskContext";
 import { useState } from "react";
 import ColumnHeading from "./ColumnHeading";
 import Card from "./Card";
