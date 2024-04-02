@@ -4,9 +4,20 @@ import TaskContext from "../context/TaskContext";
 import ColumnHeading from "./ColumnHeading";
 import DeleteButton from "./DeleteButton";
 
-const TaskModal = () => {
-  const { selectedTask, submitEditedTask, toggleModal } =
-    useContext(TaskContext);
+const TaskModal = ({
+  selectedTask,
+  setSelectedTask,
+  setModalShown,
+  toggleModal,
+}) => {
+  const {
+    todoTasks,
+    setTodoTasks,
+    doingTasks,
+    setDoingTasks,
+    doneTasks,
+    setDoneTasks,
+  } = useContext(TaskContext);
 
   const [editedTask, setEditedTask] = useState({
     ...selectedTask,
@@ -24,6 +35,34 @@ const TaskModal = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     submitEditedTask(editedTask);
+  };
+
+  const submitEditedTask = (editedTask) => {
+    switch (editedTask.columnName) {
+      case "Todo":
+        const updatedTodoTasks = todoTasks.map((todoTask) => {
+          return todoTask.id === editedTask.id ? editedTask : todoTask;
+        });
+        setTodoTasks(updatedTodoTasks);
+        break;
+      case "Doing":
+        const updatedDoingTasks = doingTasks.map((doingTask) => {
+          return doingTask.id === editedTask.id ? editedTask : doingTask;
+        });
+        setDoingTasks(updatedDoingTasks);
+        break;
+      case "Done":
+        const updatedDoneTasks = doneTasks.map((doneTask) => {
+          return doneTask.id === editedTask.id ? editedTask : doneTask;
+        });
+        setDoneTasks(updatedDoneTasks);
+        break;
+      default:
+        console.log("vet inte vad som ska uppdateras");
+        break;
+    }
+    setSelectedTask(null);
+    setModalShown(false);
   };
 
   return (

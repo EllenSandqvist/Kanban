@@ -1,15 +1,31 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import TaskContext from "../context/TaskContext";
 import { IoClose } from "react-icons/io5";
 
-const AddTaskForm = ({ onClose }) => {
-  const {
-    handleAddTask,
-    newTaskInfo,
-    newTaskTitle,
-    setNewTaskInfo,
-    setNewTaskTitle,
-  } = useContext(TaskContext);
+const AddTaskForm = ({ onClose, setInputIsShown }) => {
+  const { todoTasks, setTodoTasks } = useContext(TaskContext);
+
+  const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [newTaskInfo, setNewTaskInfo] = useState("");
+
+  //handle add new task, clear input and hide input field
+  const handleAddTask = (e) => {
+    e.preventDefault();
+    const id = todoTasks.length ? todoTasks[todoTasks.length - 1].id + 1 : 1;
+    const myNewTask = {
+      id,
+      date: new Date().toLocaleDateString(),
+      task: newTaskTitle,
+      info: newTaskInfo,
+      columnName: "Todo",
+    };
+    const newTaskList = [...todoTasks, myNewTask];
+    setTodoTasks(newTaskList);
+    setNewTaskTitle("");
+    setNewTaskInfo("");
+    setInputIsShown(false);
+  };
+
   return (
     <div className="modal modal-bg-new-task">
       <form className="form-add-task modal-content" onSubmit={handleAddTask}>

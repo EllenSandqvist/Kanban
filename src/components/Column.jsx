@@ -1,11 +1,17 @@
-import { useContext } from "react";
-import TaskContext from "../context/TaskContext";
+// import { useContext } from "react";
+// import TaskContext from "../context/TaskContext";
+import { useState } from "react";
 import ColumnHeading from "./ColumnHeading";
 import Card from "./Card";
 import AddTaskForm from "./AddTaskForm";
 
 const Column = ({ columnName, tasks }) => {
-  const { handleShowInput, inputIsShown } = useContext(TaskContext);
+  const [inputIsShown, setInputIsShown] = useState(false);
+
+  function handleShowInput() {
+    setInputIsShown(!inputIsShown);
+  }
+
   return (
     <div className="column">
       <ColumnHeading columnName={columnName} />
@@ -19,7 +25,12 @@ const Column = ({ columnName, tasks }) => {
         </button>
       ) : (
         columnName === "Todo" &&
-        inputIsShown && <AddTaskForm onClose={handleShowInput} />
+        inputIsShown && (
+          <AddTaskForm
+            onClose={handleShowInput}
+            setInputIsShown={setInputIsShown}
+          />
+        )
       )}
     </div>
   );
