@@ -94,7 +94,6 @@ export const TaskProvider = ({ children }) => {
     setInputIsShown(false);
   };
 
-  //TODO Har slutat funka sedan jag la till context. Kommer inte åt setModalShown och setSelectedTask
   const submitEditedTask = (editedTask) => {
     setModalShown(false);
     switch (editedTask.columnName) {
