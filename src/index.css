@@ -111,15 +111,18 @@ footer {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-task-heading {
-  font-size: 2rem;
-  padding: 0 0.4em;
-  border: none;
-  font-weight: bold;
-}
-
 .modal-content h2 {
   font-size: 1.3rem;
+}
+
+.modal-task-heading {
+  font-size: 2rem;
+  padding: 0.2em 0.4em;
+  border: none;
+  font-weight: bold;
+  margin-top: 0.5em;
+  border: 1px solid rgb(231, 207, 215);
+  border-radius: 10px;
 }
 
 .modal-task-info,
@@ -132,8 +135,10 @@ footer {
 }
 
 .modal-task-info {
+  width: 100%;
   border: 1px solid rgb(231, 207, 215);
   background-color: mistyrose;
+  margin-bottom: 1em;
 }
 
 .label-hidden {
@@ -168,9 +173,9 @@ footer {
   background-color: transparent;
 }
 
-.button-close:hover {
+.IoClose:hover {
   scale: 1.2;
-  color: red;
+  fill: red;
 }
 
 /* --- Add Buttons --- */
@@ -196,17 +201,21 @@ footer {
   width: 48px;
   height: 48px;
   font-size: 1.6rem;
-  position: absolute;
-  bottom: 3px;
-  right: 3px;
-  border: none;
   background-color: transparent;
+  border: 2px solid #000;
+  border-radius: 10px;
 }
 
 .trash:hover {
-  border: 2px solid rgb(155, 27, 27);
-  border-radius: 10px;
+  border: 3px solid rgb(155, 27, 27);
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.task-modal-buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /******** COLUMNS **********/
@@ -243,7 +252,6 @@ footer {
   margin: 0.5em auto;
   border-radius: 10px;
   position: relative;
-  z-index: 1;
 }
 
 .task-card-info {
@@ -252,4 +260,33 @@ footer {
   flex-grow: 1;
   padding: 0.6em 0.8em;
   gap: 0.5em;
+  margin-right: 40px;
+}
+
+.open-task-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 10px;
+  border: none;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5rem;
+  top: 0px;
+  right: 0px;
+}
+
+.open-task-btn:hover {
+  background-color: rgb(237, 226, 226);
+  border: 2px solid rgb(84, 91, 98);
+}
+
+/******** SINGLE COLUMN VUE **********/
+.close-link {
+  position: absolute;
+  font-size: 2rem;
+  top: 100px;
+  right: 41%;
 }
