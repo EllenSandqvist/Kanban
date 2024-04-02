@@ -30,7 +30,7 @@ const AddTaskForm = ({ onClose, setInputIsShown }) => {
     <div className="modal modal-bg-new-task">
       <form className="form-add-task modal-content" onSubmit={handleAddTask}>
         <button type="button" className="button-close" onClick={onClose}>
-          <IoClose />
+          <IoClose className="IoClose" />
         </button>
         <label
           htmlFor="new-task"
