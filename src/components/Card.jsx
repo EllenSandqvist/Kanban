@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import CardContent from "./CardContent";
 import TaskModal from "./TaskModal";
-import { MdOutlineOpenInFull } from "react-icons/md";
 import doingArrowRight from "../assets/doingToRight.png";
 import doingArrowLeft from "../assets/doingToLeft.png";
 import todoArrow from "../assets/todo.png";
@@ -21,17 +20,13 @@ const Card = ({ task }) => {
   }
   return (
     <>
-      <div className="task-card">
+      <div
+        className="task-card"
+        onClick={!modalShown ? () => toggleModal(task) : null}
+      >
         <div className="task-card-info">
           <CardContent task={task} />
         </div>
-        <button
-          type="button"
-          className="open-task-btn"
-          onClick={!modalShown ? () => toggleModal(task) : null}
-        >
-          <MdOutlineOpenInFull />
-        </button>
 
         <img
           role="button"
@@ -51,11 +46,14 @@ const Card = ({ task }) => {
               ? "Doing Arrow pointing Left"
               : ""
           }
+          style={{
+            alignSelf: task.columnName === "Todo" ? "end" : "start",
+          }}
           onClick={(e) => handleMoveTask(e, task)}
         />
 
         {task.columnName === "Doing" && (
-          <div>
+          <div className="arrow-div">
             <img
               role="button"
               src={todoArrow}
