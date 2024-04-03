@@ -26,7 +26,7 @@ const DeleteButton = ({ task, modalShown, toggleModal }) => {
         setDoneTasks(doneTasks.filter((doneTask) => doneTask.id !== task.id));
         break;
       default:
-        console.log("vet inte vad som ska deletas");
+        console.log("Something went wrong, no such columnName");
         break;
     }
   };
