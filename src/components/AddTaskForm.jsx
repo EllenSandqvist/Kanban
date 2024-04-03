@@ -11,9 +11,9 @@ const AddTaskForm = ({ onClose, setInputIsShown }) => {
   //handle add new task, clear input and hide input field
   const handleAddTask = (e) => {
     e.preventDefault();
-    const id = todoTasks.length ? todoTasks[todoTasks.length - 1].id + 1 : 1;
+    // const id = todoTasks.length ? todoTasks[todoTasks.length - 1].id + 1 : 1;
     const myNewTask = {
-      id,
+      id: Date.now(),
       date: new Date().toLocaleDateString(),
       task: newTaskTitle,
       info: newTaskInfo,
