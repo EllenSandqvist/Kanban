@@ -9,40 +9,10 @@ export const TaskProvider = ({ children }) => {
 
   //* Todo: Hårdkodat, ska tömmas sedan!
   const [doingTasks, setDoingTasks] = useState(
-    JSON.parse(localStorage.getItem("doingTasklist")) || [
-      {
-        id: "10",
-        date: new Date().toLocaleDateString(),
-        task: "First Doing",
-        info: "Testar hårdkodad Doing",
-        columnName: "Doing",
-      },
-      {
-        id: "11",
-        date: new Date().toLocaleDateString(),
-        task: "Second Doing",
-        info: "Testar hårdkod nr 2",
-        columnName: "Doing",
-      },
-    ]
+    JSON.parse(localStorage.getItem("doingTasklist")) || []
   );
   const [doneTasks, setDoneTasks] = useState(
-    JSON.parse(localStorage.getItem("doneTasklist")) || [
-      {
-        id: "15",
-        date: new Date().toLocaleDateString(),
-        task: "First Done",
-        info: "Testar hårdkodad Done",
-        columnName: "Done",
-      },
-      {
-        id: "16",
-        date: new Date().toLocaleDateString(),
-        task: "Second Done",
-        info: "Testar hårdkod nr 3",
-        columnName: "Done",
-      },
-    ]
+    JSON.parse(localStorage.getItem("doneTasklist")) || []
   );
 
   //Save todoTasks to localStorage
@@ -60,6 +30,40 @@ export const TaskProvider = ({ children }) => {
     localStorage.setItem("doneTasklist", JSON.stringify(doneTasks));
   }, [doneTasks]);
 
+  const handleMoveTask = (e, task) => {
+    const updatedTask = { ...task, columnName: e.target.className };
+
+    switch (task.columnName) {
+      case "Todo":
+        setTodoTasks(todoTasks.filter((todoTask) => todoTask.id !== task.id));
+        const newDoingList = [...doingTasks, updatedTask];
+        setDoingTasks(newDoingList);
+        break;
+      case "Doing":
+        setDoingTasks(
+          doingTasks.filter((doingTask) => doingTask.id !== task.id)
+        );
+        if (e.target.className === "Todo") {
+          const newTaskList = [...todoTasks, updatedTask];
+          setTodoTasks(newTaskList);
+          break;
+        } else {
+          const newTaskList = [...doneTasks, updatedTask];
+          setDoneTasks(newTaskList);
+          break;
+        }
+      case "Done":
+        setDoneTasks(doneTasks.filter((doneTask) => doneTask.id !== task.id));
+        const newTaskList = [...doingTasks, updatedTask];
+        setDoingTasks(newTaskList);
+        break;
+
+      default:
+        console.log("Can't find right task to move");
+        break;
+    }
+  };
+
   return (
     <TaskContext.Provider
       value={{
@@ -69,6 +73,7 @@ export const TaskProvider = ({ children }) => {
         setDoingTasks,
         doneTasks,
         setDoneTasks,
+        handleMoveTask,
       }}
     >
       {children}
