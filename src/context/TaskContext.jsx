@@ -7,7 +7,6 @@ export const TaskProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("todoTasklist")) || []
   );
 
-  //* Todo: Hårdkodat, ska tömmas sedan!
   const [doingTasks, setDoingTasks] = useState(
     JSON.parse(localStorage.getItem("doingTasklist")) || []
   );
