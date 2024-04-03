@@ -9,7 +9,7 @@ const Header = () => {
           The Board App
         </Link>
       </h1>
-      <Nav />
+      {/* <Nav /> */}
     </header>
   );
 };
