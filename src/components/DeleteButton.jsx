@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import TaskContext from "../context/TaskContext";
+
+//import of images/icons
 import { IoTrash } from "react-icons/io5";
 
-const DeleteButton = ({ task, modalShown, toggleModal }) => {
+const DeleteButton = ({ modalShown, task, toggleModal }) => {
   const {
     todoTasks,
     setTodoTasks,
@@ -26,13 +28,13 @@ const DeleteButton = ({ task, modalShown, toggleModal }) => {
         setDoneTasks(doneTasks.filter((doneTask) => doneTask.id !== task.id));
         break;
       default:
-        console.log("Something went wrong, no such columnName");
+        console.log("Something went wrong, can't find right task to delete");
         break;
     }
   };
 
   return (
-    <button className="trash" type="button">
+    <button className="DeleteButton" type="button">
       <IoTrash
         onClick={() => {
           handleDelete(task);

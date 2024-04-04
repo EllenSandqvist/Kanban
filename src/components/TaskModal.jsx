@@ -1,14 +1,18 @@
 import { useContext, useState } from "react";
-import { IoClose } from "react-icons/io5";
 import TaskContext from "../context/TaskContext";
+
+//import of components
 import ColumnHeading from "./ColumnHeading";
 import DeleteButton from "./DeleteButton";
 
+//import of images/icons
+import { IoClose } from "react-icons/io5";
+
 const TaskModal = ({
-  selectedTask,
-  setSelectedTask,
   modalShown,
   setModalShown,
+  selectedTask,
+  setSelectedTask,
   toggleModal,
 }) => {
   const {
@@ -68,8 +72,8 @@ const TaskModal = ({
   };
 
   return (
-    <div className="modal">
-      <form className="modal-content" onSubmit={handleSubmit}>
+    <div className="TaskModal">
+      <form className="TaskModal-content" onSubmit={handleSubmit}>
         <button
           type="button"
           className="button-close"
@@ -85,7 +89,7 @@ const TaskModal = ({
         ></label>
         <input
           type="text"
-          className="modal-task-heading editable"
+          className="TaskModal-heading editable"
           id="editTaskName"
           name="task"
           value={editedTask.task}
@@ -98,20 +102,20 @@ const TaskModal = ({
           className="label-hidden"
         ></label>
         <textarea
-          className="modal-task-info editable"
+          className="TaskModal-info editable"
           id="editTaskInfo"
           name="info"
           rows={8}
           value={editedTask.info}
           onChange={handleEdit}
         />
-        <div className="task-modal-buttons">
+        <div className="TaskModal-buttons">
           <button type="submit" className="add-button">
             Save
           </button>
           <DeleteButton
-            task={selectedTask}
             modalShown={modalShown}
+            task={selectedTask}
             toggleModal={toggleModal}
           />
         </div>
