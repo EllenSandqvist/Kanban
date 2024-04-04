@@ -29,40 +29,6 @@ export const TaskProvider = ({ children }) => {
     localStorage.setItem("doneTasklist", JSON.stringify(doneTasks));
   }, [doneTasks]);
 
-  const handleMoveTask = (e, task) => {
-    const updatedTask = { ...task, columnName: e.target.className };
-
-    switch (task.columnName) {
-      case "Todo":
-        setTodoTasks(todoTasks.filter((todoTask) => todoTask.id !== task.id));
-        const newDoingList = [...doingTasks, updatedTask];
-        setDoingTasks(newDoingList);
-        break;
-      case "Doing":
-        setDoingTasks(
-          doingTasks.filter((doingTask) => doingTask.id !== task.id)
-        );
-        if (e.target.className === "Todo") {
-          const newTaskList = [...todoTasks, updatedTask];
-          setTodoTasks(newTaskList);
-          break;
-        } else {
-          const newTaskList = [...doneTasks, updatedTask];
-          setDoneTasks(newTaskList);
-          break;
-        }
-      case "Done":
-        setDoneTasks(doneTasks.filter((doneTask) => doneTask.id !== task.id));
-        const newTaskList = [...doingTasks, updatedTask];
-        setDoingTasks(newTaskList);
-        break;
-
-      default:
-        console.log("Can't find right task to move");
-        break;
-    }
-  };
-
   return (
     <TaskContext.Provider
       value={{
@@ -72,7 +38,6 @@ export const TaskProvider = ({ children }) => {
         setDoingTasks,
         doneTasks,
         setDoneTasks,
-        handleMoveTask,
       }}
     >
       {children}
