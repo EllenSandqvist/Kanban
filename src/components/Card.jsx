@@ -1,30 +1,90 @@
 import { useContext, useState } from "react";
-import CardContent from "./CardContent";
-import TaskModal from "./TaskModal";
-import doingArrowRight from "../assets/doingToRight.png";
-import doingArrowLeft from "../assets/doingToLeft.png";
-import todoArrow from "../assets/todo.png";
-import doneArrow from "../assets/done.png";
 import TaskContext from "../context/TaskContext";
 
+//import of components
+import CardContent from "./CardContent";
+import TaskModal from "./TaskModal";
+
+//import of images/icons
+import doingArrowLeft from "../assets/doingToLeft.png";
+import doingArrowRight from "../assets/doingToRight.png";
+import doneArrow from "../assets/done.png";
+import todoArrow from "../assets/todo.png";
+
 const Card = ({ task }) => {
-  const { handleMoveTask } = useContext(TaskContext);
+  const {
+    todoTasks,
+    setTodoTasks,
+    doingTasks,
+    setDoingTasks,
+    doneTasks,
+    setDoneTasks,
+  } = useContext(TaskContext);
 
   const [modalShown, setModalShown] = useState(false);
   const [selectedTask, setSelectedTask] = useState({});
 
-  //function to toggle task modal
+  //toggle modal and set selectedTask
   function toggleModal(task) {
     setModalShown(!modalShown);
     setSelectedTask({ ...task });
   }
+
+  const handleMoveTask = (e, task) => {
+    const updatedTask = { ...task, columnName: e.target.className };
+
+    switch (task.columnName) {
+      case "Todo":
+        setTodoTasks(todoTasks.filter((todoTask) => todoTask.id !== task.id));
+        const newDoingList = [...doingTasks, updatedTask];
+        setDoingTasks(newDoingList);
+        break;
+      case "Doing":
+        setDoingTasks(
+          doingTasks.filter((doingTask) => doingTask.id !== task.id)
+        );
+        if (e.target.className === "Todo") {
+          const newTaskList = [...todoTasks, updatedTask];
+          setTodoTasks(newTaskList);
+          break;
+        } else {
+          const newTaskList = [...doneTasks, updatedTask];
+          setDoneTasks(newTaskList);
+          break;
+        }
+      case "Done":
+        setDoneTasks(doneTasks.filter((doneTask) => doneTask.id !== task.id));
+        const newTaskList = [...doingTasks, updatedTask];
+        setDoingTasks(newTaskList);
+        break;
+
+      default:
+        console.log("Can't find right task to move");
+        break;
+    }
+  };
+
+  //img variables with different values depending on column
+  const arrowSrc =
+    task.columnName === "Todo"
+      ? doingArrowRight
+      : task.columnName === "Done"
+      ? doingArrowLeft
+      : "";
+  const arrowAlt =
+    task.columnName === "Todo"
+      ? "Doing arrow pointing right"
+      : task.columnName === "Done"
+      ? "Doing arrow pointing left"
+      : "";
+
   return (
     <>
       <div
-        className="task-card"
+        className="Card"
         onClick={!modalShown ? () => toggleModal(task) : null}
       >
-        <div className="task-card-info">
+        <div className="CardContent">
           <CardContent task={task} />
         </div>
 
@@ -32,20 +92,8 @@ const Card = ({ task }) => {
           role="button"
           title="Move task to Doing"
           className="Doing"
-          src={
-            task.columnName === "Todo"
-              ? doingArrowRight
-              : task.columnName === "Done"
-              ? doingArrowLeft
-              : ""
-          }
-          alt={
-            task.columnName === "Todo"
-              ? "Doing Arrow pointing Right"
-              : task.columnName === "Done"
-              ? "Doing Arrow pointing Left"
-              : ""
-          }
+          src={arrowSrc}
+          alt={arrowAlt}
           style={{
             alignSelf: task.columnName === "Todo" ? "end" : "start",
           }}
@@ -76,10 +124,10 @@ const Card = ({ task }) => {
       </div>
       {modalShown && (
         <TaskModal
-          selectedTask={selectedTask}
-          setSelectedTask={setSelectedTask}
           modalShown={modalShown}
           setModalShown={setModalShown}
+          selectedTask={selectedTask}
+          setSelectedTask={setSelectedTask}
           toggleModal={toggleModal}
         />
       )}
