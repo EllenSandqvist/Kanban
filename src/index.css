@@ -216,7 +216,6 @@ main {
 .TaskModal-heading {
   font-size: 2rem;
   padding: 0.2em 0.4em;
-  border: none;
   font-weight: bold;
   margin-top: 0.5em;
   border: 2px solid rgb(231, 207, 215);
@@ -363,5 +362,9 @@ main {
   .AddTaskModal-content,
   .TaskModal-content {
     width: 90%;
+  }
+
+  .TaskModal-heading {
+    width: 100%;
   }
 }
