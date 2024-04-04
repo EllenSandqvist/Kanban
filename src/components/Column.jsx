@@ -1,9 +1,15 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
+
+//import of components
 import ColumnHeading from "./ColumnHeading";
 import Card from "./Card";
-import AddTaskForm from "./AddTaskForm";
+import AddTaskForm from "./AddTaskModal";
 
-const Column = ({ columnTitle, tasks }) => {
+//import of images/icons
+import { IoClose } from "react-icons/io5";
+
+const Column = ({ atHomePage, columnTitle, tasks }) => {
   const [inputIsShown, setInputIsShown] = useState(false);
 
   function handleShowInput() {
@@ -11,8 +17,13 @@ const Column = ({ columnTitle, tasks }) => {
   }
 
   return (
-    <div className="column">
+    <div className="Column">
       <ColumnHeading columnTitle={columnTitle} />
+      {!atHomePage && (
+        <Link className="button-close" to="/">
+          <IoClose role="button" />
+        </Link>
+      )}
       {tasks.map((task) => {
         return <Card key={task.id} task={task} />;
       })}
