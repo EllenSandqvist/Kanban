@@ -14,7 +14,7 @@ const TaskModalContent = ({
   toggleModal,
 }) => {
   return (
-    <form className="TaskModal-content" onSubmit={onSubmit}>
+    <form className="TaskMC" onSubmit={onSubmit}>
       <button
         type="button"
         className="button-close"
@@ -30,7 +30,7 @@ const TaskModalContent = ({
       ></label>
       <input
         type="text"
-        className="TaskModal-heading editable"
+        className="TaskMC-heading editable"
         id="editTaskName"
         name="task"
         value={editedTask.task}
@@ -43,7 +43,7 @@ const TaskModalContent = ({
         className="label-hidden"
       ></label>
       <textarea
-        className="TaskModal-info editable"
+        className="TaskMC-info editable"
         id="editTaskInfo"
         name="info"
         rows={8}

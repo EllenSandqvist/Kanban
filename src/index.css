@@ -171,8 +171,8 @@ main {
   z-index: 2;
 }
 
-.AddTaskModal-content,
-.TaskModal-content {
+.AddTaskForm,
+.TaskMC {
   background-color: white;
   margin: 15vh auto;
   padding: 1.7em;
@@ -188,30 +188,26 @@ main {
   gap: 1em;
 }
 
-.AddTaskModal-heading {
-  margin: 1em 0;
-}
-
-.AddTaskModal-heading,
-.AddTaskModal-info,
-.TaskModal-info {
+.AddTaskForm-heading,
+.AddTaskForm-info,
+.TaskMC-info {
   width: 95%;
   padding: 0.5em;
   border-radius: 10px;
   line-height: 1.5;
-  font-size: 1.3rem;
-}
-
-.AddTaskModal-info,
-.TaskModal-info {
   font-size: 1.1rem;
 }
 
-.TaskModal h2 {
+.AddTaskForm-heading {
+  margin: 1em 0;
   font-size: 1.3rem;
 }
 
-.TaskModal-heading {
+.TaskMC h2 {
+  font-size: 1.3rem;
+}
+
+.TaskMC-heading {
   font-size: 2rem;
   padding: 0.2em 0.4em;
   font-weight: bold;
@@ -220,7 +216,7 @@ main {
   border-radius: 10px;
 }
 
-.TaskModal-info {
+.TaskMC-info {
   width: 100%;
   border: 1px solid rgb(231, 207, 215);
   background-color: mistyrose;
@@ -357,8 +353,8 @@ main {
     min-height: unset;
   }
 
-  .AddTaskModal-content,
-  .TaskModal-content {
+  .AddTaskForm,
+  .TaskModalContent {
     width: 90%;
   }
 

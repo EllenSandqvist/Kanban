@@ -10,7 +10,7 @@ const AddTaskForm = ({
   setNewTaskTitle,
 }) => {
   return (
-    <form className="AddTaskModal-content" onSubmit={handleAddTask}>
+    <form className="AddTaskForm" onSubmit={handleAddTask}>
       <button type="button" className="button-close" onClick={onClose}>
         <IoClose className="IoClose" />
       </button>
@@ -23,7 +23,7 @@ const AddTaskForm = ({
         name="task"
         type="text"
         autoFocus
-        className="AddTaskModal-heading"
+        className="AddTaskForm-heading"
         id="new-task"
         placeholder="New task..."
         required
@@ -38,7 +38,7 @@ const AddTaskForm = ({
       <textarea
         name="info"
         id="task-info"
-        className="AddTaskModal-info"
+        className="AddTaskForm-info"
         placeholder="Task info..."
         cols="50"
         rows="5"
