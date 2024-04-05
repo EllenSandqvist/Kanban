@@ -1,0 +1,46 @@
+.Column {
+  width: 20%;
+  min-width: 200px;
+  min-height: 50vh;
+  background-color: rgba(235, 235, 235, 0.9);
+  border-radius: 15px;
+  margin: 1em;
+  padding: 0.9em;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5em;
+  position: relative;
+}
+
+.ColumnHeading {
+  background-color: rgba(113, 235, 222, 0.8);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.headingText {
+  padding: 0.2em 1em;
+}
+
+.headingLink {
+  text-decoration: none;
+  color: black;
+}
+
+.headingText:hover {
+  background-color: rgba(120, 248, 235, 0.9);
+  border-radius: 20px;
+  text-decoration: underline;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+/********** MEDIA QUERY **********/
+@media (max-width: 700px) {
+  .Column {
+    width: 80%;
+    min-height: unset;
+  }
+}

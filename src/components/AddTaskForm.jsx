@@ -1,6 +1,9 @@
 //import of images/icons
 import { IoClose } from "react-icons/io5";
 
+//import styles from separate css stylesheet
+import styles from "../styling/AddTask.module.css";
+
 const AddTaskForm = ({
   handleAddTask,
   newTaskInfo,
@@ -10,7 +13,7 @@ const AddTaskForm = ({
   setNewTaskTitle,
 }) => {
   return (
-    <form className="AddTaskForm" onSubmit={handleAddTask}>
+    <form className={styles.AddTaskForm} onSubmit={handleAddTask}>
       <button type="button" className="button-close" onClick={onClose}>
         <IoClose className="IoClose" />
       </button>
@@ -23,7 +26,7 @@ const AddTaskForm = ({
         name="task"
         type="text"
         autoFocus
-        className="AddTaskForm-heading"
+        className={styles.heading}
         id="new-task"
         placeholder="New task..."
         required
@@ -38,7 +41,7 @@ const AddTaskForm = ({
       <textarea
         name="info"
         id="task-info"
-        className="AddTaskForm-info"
+        className={styles.info}
         placeholder="Task info..."
         cols="50"
         rows="5"

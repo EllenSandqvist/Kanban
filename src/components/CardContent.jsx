@@ -4,6 +4,9 @@ import doingArrowRight from "../assets/doingToRight.png";
 import doneArrow from "../assets/done.png";
 import todoArrow from "../assets/todo.png";
 
+//import styles from separate css stylesheet
+import styles from "../styling/CardContent.module.css";
+
 const CardContent = ({ handleMoveTask, modalShown, task, toggleModal }) => {
   //img variables with different values depending on column
   const arrowSrc =
@@ -20,9 +23,9 @@ const CardContent = ({ handleMoveTask, modalShown, task, toggleModal }) => {
       : "";
 
   return (
-    <div className="CardContent">
+    <div className={styles.CardContent}>
       <div
-        className="CardContent-text"
+        className={styles.text}
         onClick={!modalShown ? () => toggleModal(task) : null}
       >
         <h3>
@@ -44,7 +47,7 @@ const CardContent = ({ handleMoveTask, modalShown, task, toggleModal }) => {
       />
 
       {task.columnName === "Doing" && (
-        <div className="arrow-div">
+        <div className={styles.arrowDiv}>
           <img
             role="button"
             src={todoArrow}

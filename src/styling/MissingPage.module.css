@@ -35,3 +35,19 @@
   text-decoration: none;
   color: black;
 }
+
+/********** MEDIA QUERY **********/
+@media (max-width: 700px) {
+  .MissingPage {
+    padding-top: 0em;
+  }
+
+  .div {
+    scale: 0.8;
+    margin-bottom: 0em;
+  }
+
+  .text {
+    text-align: center;
+  }
+}

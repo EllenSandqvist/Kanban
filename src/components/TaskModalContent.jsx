@@ -5,6 +5,9 @@ import DeleteButton from "./DeleteButton";
 //import of images/icons
 import { IoClose } from "react-icons/io5";
 
+//import styles from separate css stylesheet
+import styles from "../styling/TaskModal.module.css";
+
 const TaskModalContent = ({
   columnTitle,
   editedTask,
@@ -14,7 +17,7 @@ const TaskModalContent = ({
   toggleModal,
 }) => {
   return (
-    <form className="TaskMC" onSubmit={onSubmit}>
+    <form className={styles.form} onSubmit={onSubmit}>
       <button
         type="button"
         className="button-close"
@@ -30,7 +33,7 @@ const TaskModalContent = ({
       ></label>
       <input
         type="text"
-        className="TaskMC-heading editable"
+        className={`editable ${styles.taskHeading}`}
         id="editTaskName"
         name="task"
         value={editedTask.task}
@@ -43,14 +46,14 @@ const TaskModalContent = ({
         className="label-hidden"
       ></label>
       <textarea
-        className="TaskMC-info editable"
+        className={`editable ${styles.taskInfo}`}
         id="editTaskInfo"
         name="info"
         rows={8}
         value={editedTask.info}
         onChange={handleEdit}
       />
-      <div className="TaskModal-buttons">
+      <div className={styles.buttons}>
         <button type="submit" className="add-button">
           Save
         </button>

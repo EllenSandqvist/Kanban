@@ -4,6 +4,9 @@ import TaskContext from "../context/TaskContext";
 //import of components
 import AddTaskForm from "./AddTaskForm";
 
+//import styles from separate css stylesheet
+import styles from "../styling/AddTask.module.css";
+
 const AddTaskModal = ({ handleShowInput, setInputIsShown }) => {
   const { todoTasks, setTodoTasks } = useContext(TaskContext);
 
@@ -28,7 +31,7 @@ const AddTaskModal = ({ handleShowInput, setInputIsShown }) => {
   };
 
   return (
-    <div className="AddTaskModal">
+    <div className={styles.AddTaskModal}>
       <AddTaskForm
         handleAddTask={handleAddTask}
         newTaskInfo={newTaskInfo}

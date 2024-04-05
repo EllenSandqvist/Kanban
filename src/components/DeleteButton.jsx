@@ -4,6 +4,9 @@ import TaskContext from "../context/TaskContext";
 //import of images/icons
 import { IoTrash } from "react-icons/io5";
 
+//import styles from separate css stylesheet
+import styles from "../styling/DeleteButton.module.css";
+
 const DeleteButton = ({ task, toggleModal }) => {
   const {
     todoTasks,
@@ -34,7 +37,7 @@ const DeleteButton = ({ task, toggleModal }) => {
   };
 
   return (
-    <button className="DeleteButton" type="button">
+    <button className={styles.DeleteButton} type="button">
       <IoTrash
         onClick={() => {
           handleDelete(task);

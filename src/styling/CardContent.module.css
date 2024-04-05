@@ -1,0 +1,38 @@
+.CardContent {
+  background-color: white;
+  width: 98%;
+  min-width: 160px;
+  margin: 0.5em auto;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+.text {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.6em 0.8em 0.2em 0.8em;
+  gap: 0.5em;
+  cursor: zoom-in;
+}
+
+.text::after {
+  content: "";
+  height: 5px;
+  background-image: radial-gradient(circle, #f08787 20%, transparent 0);
+  background-position: bottom;
+  background-size: 8px 6px;
+}
+
+.arrowDiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.CardContent img {
+  cursor: pointer;
+}

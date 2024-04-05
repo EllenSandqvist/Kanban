@@ -4,6 +4,9 @@ import TaskContext from "../context/TaskContext";
 //import of components
 import TaskModalContent from "./TaskModalContent";
 
+//import styles from separate css stylesheet
+import styles from "../styling/TaskModal.module.css";
+
 const TaskModal = ({
   setModalShown,
   selectedTask,
@@ -67,7 +70,7 @@ const TaskModal = ({
   };
 
   return (
-    <div className="TaskModal">
+    <div className={styles.TaskModal}>
       <TaskModalContent
         columnTitle={selectedTask.columnName}
         editedTask={editedTask}

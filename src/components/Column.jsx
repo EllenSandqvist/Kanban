@@ -9,6 +9,9 @@ import AddTaskModal from "./AddTaskModal";
 //import of images/icons
 import { IoClose } from "react-icons/io5";
 
+//import styles from separate css stylesheet
+import styles from "../styling/Column.module.css";
+
 const Column = ({ atHomePage, columnTitle, tasks }) => {
   const [inputIsShown, setInputIsShown] = useState(false);
 
@@ -17,7 +20,7 @@ const Column = ({ atHomePage, columnTitle, tasks }) => {
   }
 
   return (
-    <div className="Column">
+    <div className={styles.Column}>
       <ColumnHeading columnTitle={columnTitle} />
       {!atHomePage && (
         <Link className="button-close" to="/">
