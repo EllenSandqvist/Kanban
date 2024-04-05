@@ -10,7 +10,6 @@ const TaskModalContent = ({
   editedTask,
   handleEdit,
   onSubmit,
-  modalShown,
   selectedTask,
   toggleModal,
 }) => {
@@ -55,11 +54,7 @@ const TaskModalContent = ({
         <button type="submit" className="add-button">
           Save
         </button>
-        <DeleteButton
-          modalShown={modalShown}
-          task={selectedTask}
-          toggleModal={toggleModal}
-        />
+        <DeleteButton task={selectedTask} toggleModal={toggleModal} />
       </div>
     </form>
   );

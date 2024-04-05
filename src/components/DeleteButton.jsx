@@ -4,7 +4,7 @@ import TaskContext from "../context/TaskContext";
 //import of images/icons
 import { IoTrash } from "react-icons/io5";
 
-const DeleteButton = ({ modalShown, task, toggleModal }) => {
+const DeleteButton = ({ task, toggleModal }) => {
   const {
     todoTasks,
     setTodoTasks,
@@ -38,7 +38,7 @@ const DeleteButton = ({ modalShown, task, toggleModal }) => {
       <IoTrash
         onClick={() => {
           handleDelete(task);
-          modalShown && toggleModal();
+          toggleModal();
         }}
         tabIndex="0"
         aria-label={`delete ${task.task}`}

@@ -5,7 +5,6 @@ import TaskContext from "../context/TaskContext";
 import TaskModalContent from "./TaskModalContent";
 
 const TaskModal = ({
-  modalShown,
   setModalShown,
   selectedTask,
   setSelectedTask,
@@ -74,7 +73,6 @@ const TaskModal = ({
         editedTask={editedTask}
         handleEdit={handleEdit}
         onSubmit={handleSubmit}
-        modalShown={modalShown}
         selectedTask={selectedTask}
         toggleModal={toggleModal}
       />
