@@ -4,7 +4,7 @@ import { useState } from "react";
 //import of components
 import ColumnHeading from "./ColumnHeading";
 import Card from "./Card";
-import AddTaskForm from "./AddTaskModal";
+import AddTaskModal from "./AddTaskModal";
 
 //import of images/icons
 import { IoClose } from "react-icons/io5";
@@ -35,8 +35,8 @@ const Column = ({ atHomePage, columnTitle, tasks }) => {
       ) : (
         columnTitle === "Todo" &&
         inputIsShown && (
-          <AddTaskForm
-            onClose={handleShowInput}
+          <AddTaskModal
+            handleShowInput={handleShowInput}
             setInputIsShown={setInputIsShown}
           />
         )
