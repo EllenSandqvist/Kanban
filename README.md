@@ -1,8 +1,15 @@
-# React + Vite
+# Kanban Board App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+This is a simple Kanban app for managing project tasks or organizing the chaos of your personal life.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- Create and edit project tasks
+- Dive into detailed views of individual tasks by clicking on them
+- Click on a column to view its tasks exclusively.
+- Move tasks between different stages
+- Overview of the entire workflow
+
+[Try it out here](https://task-flow-board.netlify.app/)
