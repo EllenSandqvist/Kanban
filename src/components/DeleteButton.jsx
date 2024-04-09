@@ -8,27 +8,24 @@ import { IoTrash } from "react-icons/io5";
 import styles from "../styling/DeleteButton.module.css";
 
 const DeleteButton = ({ task, toggleModal }) => {
-  const {
-    todoTasks,
-    setTodoTasks,
-    doingTasks,
-    setDoingTasks,
-    doneTasks,
-    setDoneTasks,
-  } = useContext(TaskContext);
+  const { setTodoTasks, setDoingTasks, setDoneTasks } = useContext(TaskContext);
 
   const handleDelete = (task) => {
     switch (task.columnName) {
       case "Todo":
-        setTodoTasks(todoTasks.filter((todoTask) => todoTask.id !== task.id));
+        setTodoTasks((prevTasks) => [
+          ...prevTasks.filter((todoTask) => todoTask.id !== task.id),
+        ]);
         break;
       case "Doing":
-        setDoingTasks(
-          doingTasks.filter((doingTask) => doingTask.id !== task.id)
-        );
+        setDoingTasks((prevTasks) => [
+          ...prevTasks.filter((doingTask) => doingTask.id !== task.id),
+        ]);
         break;
       case "Done":
-        setDoneTasks(doneTasks.filter((doneTask) => doneTask.id !== task.id));
+        setDoneTasks((prevTasks) => [
+          ...prevTasks.filter((doneTask) => doneTask.id !== task.id),
+        ]);
         break;
       default:
         console.log("Something went wrong, can't find right task to delete");

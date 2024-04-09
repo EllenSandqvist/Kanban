@@ -29,13 +29,15 @@ const Card = ({ task }) => {
 
     switch (task.columnName) {
       case "Todo":
-        setTodoTasks(todoTasks.filter((todoTask) => todoTask.id !== task.id));
+        setTodoTasks((prevTasks) =>
+          prevTasks.filter((todoTask) => todoTask.id !== task.id)
+        );
         const newDoingList = [...doingTasks, updatedTask];
         setDoingTasks(newDoingList);
         break;
       case "Doing":
-        setDoingTasks(
-          doingTasks.filter((doingTask) => doingTask.id !== task.id)
+        setDoingTasks((prevTasks) =>
+          prevTasks.filter((doingTask) => doingTask.id !== task.id)
         );
         if (e.target.className === "Todo") {
           const newTaskList = [...todoTasks, updatedTask];
@@ -47,7 +49,9 @@ const Card = ({ task }) => {
           break;
         }
       case "Done":
-        setDoneTasks(doneTasks.filter((doneTask) => doneTask.id !== task.id));
+        setDoneTasks((prevTasks) =>
+          prevTasks.filter((doneTask) => doneTask.id !== task.id)
+        );
         const newTaskList = [...doingTasks, updatedTask];
         setDoingTasks(newTaskList);
         break;
