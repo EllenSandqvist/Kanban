@@ -51,6 +51,11 @@ main {
   cursor: url("./assets/pencil-cursor.svg"), auto;
 }
 
+/* Grab cursor to indicate draggable content */
+.grab:hover {
+  cursor: grab;
+}
+
 /********** BUTTONS **********/
 /* --- Close Buttons --- */
 .button-close {

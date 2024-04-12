@@ -3,11 +3,18 @@ import doingArrowLeft from "../assets/doingToLeft.png";
 import doingArrowRight from "../assets/doingToRight.png";
 import doneArrow from "../assets/done.png";
 import todoArrow from "../assets/todo.png";
+import { ImEnlarge2 } from "react-icons/im";
 
 //import styles from separate css stylesheet
 import styles from "../styling/CardContent.module.css";
 
-const CardContent = ({ handleMoveTask, modalShown, task, toggleModal }) => {
+const CardContent = ({
+  atHomePage,
+  handleTaskMove,
+  modalShown,
+  task,
+  toggleModal,
+}) => {
   //img variables with different values depending on column
   const arrowSrc =
     task.columnName === "Todo"
@@ -22,17 +29,33 @@ const CardContent = ({ handleMoveTask, modalShown, task, toggleModal }) => {
       ? "Doing arrow pointing left"
       : "";
 
+  // --- DRAG AND DROP SECTION  ---
+  // function that sets what data should be avaible when dropped.
+  //To bring the whole task object in the move it first needs to be stringified
+  function drag(e, column) {
+    e.dataTransfer.setData("movedTask", JSON.stringify(task));
+    e.dataTransfer.setData("fromColumn", column);
+  }
+
+  //setting draggable = true makes the div draggable
+  //when drag starts function drag(....) is called
   return (
-    <div className={styles.CardContent}>
-      <div
-        className={styles.text}
-        onClick={!modalShown ? () => toggleModal(task) : null}
-      >
+    <div
+      className={styles.CardContent}
+      //conditional rendering so that element is only draggable in Homepage (when all columns are shown)
+      draggable={atHomePage ? true : false}
+      onDragStart={(e) => drag(e, task.columnName)}
+      id={task.id}
+    >
+      <div className={`${styles.text} ${atHomePage ? "grab" : ""}`}>
         <h3>
           {task.task.length <= 30 ? task.task : `${task.task.slice(0, 30)}...`}
         </h3>
         <p>{task.date}</p>
       </div>
+      <button className={styles.enlarge}>
+        <ImEnlarge2 onClick={!modalShown ? () => toggleModal(task) : null} />
+      </button>
 
       <img
         role="button"
@@ -43,7 +66,9 @@ const CardContent = ({ handleMoveTask, modalShown, task, toggleModal }) => {
         style={{
           alignSelf: task.columnName === "Todo" ? "end" : "start",
         }}
-        onClick={(e) => handleMoveTask(e, task)}
+        onClick={(e) =>
+          handleTaskMove(e, task.columnName, e.target.className, task)
+        }
       />
 
       {task.columnName === "Doing" && (
@@ -54,7 +79,9 @@ const CardContent = ({ handleMoveTask, modalShown, task, toggleModal }) => {
             alt="todo arrow"
             className="Todo"
             title="Move task to Todo"
-            onClick={(e) => handleMoveTask(e, task)}
+            onClick={(e) =>
+              handleTaskMove(e, task.columnName, e.target.className, task)
+            }
           />
 
           <img
@@ -63,7 +90,9 @@ const CardContent = ({ handleMoveTask, modalShown, task, toggleModal }) => {
             alt="done arrow"
             className="Done"
             title="Move task to Done"
-            onClick={(e) => handleMoveTask(e, task)}
+            onClick={(e) =>
+              handleTaskMove(e, task.columnName, e.target.className, task)
+            }
           />
         </div>
       )}
